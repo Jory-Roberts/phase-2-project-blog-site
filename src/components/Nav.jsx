@@ -1,4 +1,4 @@
-const Nav = () => {
+const Nav = ({ search, setSearch }) => {
   return (
     <nav className='Nav'>
       <form
@@ -10,7 +10,8 @@ const Nav = () => {
           id='search'
           type='text'
           placeholder='Search Posts'
-          onChange={(e) => console.log(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </form>
     </nav>
