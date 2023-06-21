@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Nav from './components/Nav';
+import NewPost from './components/NewPost';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -32,7 +34,20 @@ function App() {
         search={search}
         setSearch={setSearch}
       />
-      <Home posts={searchResults} />
+      <Switch>
+        <Route
+          exact
+          path='/'
+        >
+          <Home posts={searchResults} />
+        </Route>
+        <Route
+          exact
+          path='/post'
+        >
+          <NewPost />
+        </Route>
+      </Switch>
       <Footer />
     </div>
   );
