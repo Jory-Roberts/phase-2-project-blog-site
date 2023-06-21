@@ -31,17 +31,6 @@ function App() {
     setSearchResults(filteredResults);
   }, [posts, search]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e);
-
-    const newPost = {
-      title: postTitle,
-      body: postBody,
-    };
-    console.log(newPost);
-  };
-
   return (
     <div className='App'>
       <Header title='Insight into React JS' />
@@ -61,7 +50,6 @@ function App() {
           path='/post'
         >
           <NewPost
-            handleSubmit={handleSubmit}
             postTitle={postTitle}
             setPostTitle={setPostTitle}
             postBody={postBody}

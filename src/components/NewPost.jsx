@@ -1,4 +1,20 @@
-const NewPost = ({ handleSubmit, postTitle, setPostTitle, postBody, setPostBody }) => {
+import { format } from 'date-fns';
+
+const NewPost = ({ postTitle, setPostTitle, postBody, setPostBody }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+
+    const newPost = {
+      title: postTitle,
+      body: postBody,
+      datetime: datetime,
+    };
+    console.log(newPost);
+  };
+
   return (
     <main className='NewPost'>
       <h2>New Post</h2>
@@ -26,4 +42,5 @@ const NewPost = ({ handleSubmit, postTitle, setPostTitle, postBody, setPostBody 
     </main>
   );
 };
+
 export default NewPost;
