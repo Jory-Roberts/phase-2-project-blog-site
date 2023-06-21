@@ -10,6 +10,10 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 function App() {
   const [posts, setPosts] = useState([]);
+
+  const [postTitle, setPostTitle] = useState('');
+  const [postBody, setPostBody] = useState('');
+
   const [searchResults, setSearchResults] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -26,6 +30,17 @@ function App() {
     const filteredResults = posts.filter((post) => post.title.toLowerCase().includes(search.toLowerCase()));
     setSearchResults(filteredResults);
   }, [posts, search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+
+    const newPost = {
+      title: postTitle,
+      body: postBody,
+    };
+    console.log(newPost);
+  };
 
   return (
     <div className='App'>
@@ -45,7 +60,13 @@ function App() {
           exact
           path='/post'
         >
-          <NewPost />
+          <NewPost
+            handleSubmit={handleSubmit}
+            postTitle={postTitle}
+            setPostTitle={setPostTitle}
+            postBody={postBody}
+            setPostBody={setPostBody}
+          />
         </Route>
       </Switch>
       <Footer />
