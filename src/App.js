@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Nav from './components/Nav';
 import About from './components/About';
 import NewPost from './components/NewPost';
+import PostPage from './components/PostPage';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -51,6 +52,12 @@ function App() {
           path='/post'
         >
           <NewPost addNewPost={addNewPost} />
+        </Route>
+        <Route
+          exact
+          path='/post/:id'
+        >
+          <PostPage posts={posts} />
         </Route>
         <Route
           exact

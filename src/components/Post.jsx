@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
 const Post = ({ post }) => {
-  const { title, datetime, body } = post;
+  const { title, datetime, body, id } = post;
 
   return (
     <article className='post'>
-      <Link to={`/post/${post.id}`}>
+      <Link to={`/post/${id}`}>
         <h2>{title}</h2>
       </Link>
       <p className='postdate'>{datetime}</p>
