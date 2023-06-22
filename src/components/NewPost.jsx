@@ -1,4 +1,42 @@
-const NewPost = ({ handleSubmit, postTitle, setPostTitle, postBody, setPostBody }) => {
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { format } from 'date-fns';
+
+const NewPost = ({ addNewPost }) => {
+  const API = process.env.REACT_APP_API_URL;
+  const history = useHistory();
+
+  const [postTitle, setPostTitle] = useState('');
+  const [postBody, setPostBody] = useState('');
+
+  const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const newPost = {
+      title: postTitle,
+      datetime: datetime,
+      body: postBody,
+    };
+
+    await fetch(API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newPost),
+    });
+
+    addNewPost(newPost);
+
+    console.log(newPost);
+
+    setPostTitle('');
+    setPostBody('');
+    history.push('/');
+  };
+
   return (
     <main className='NewPost'>
       <h2>New Post</h2>
