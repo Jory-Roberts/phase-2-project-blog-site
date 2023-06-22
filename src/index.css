@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.Header,
+.Footer {
+  background-color: #282c34;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
