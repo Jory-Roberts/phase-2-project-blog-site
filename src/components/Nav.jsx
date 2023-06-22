@@ -23,6 +23,9 @@ const Nav = ({ search, setSearch }) => {
         <li>
           <Link to='/post'>Post</Link>
         </li>
+        <li>
+          <Link to='/about'>About</Link>
+        </li>
       </ul>
     </nav>
   );

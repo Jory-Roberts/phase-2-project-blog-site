@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+import { Route, Switch, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { format } from 'date-fns';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Nav from './components/Nav';
+import About from './components/About';
 import NewPost from './components/NewPost';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function App() {
+  const history = useHistory();
+
   const [posts, setPosts] = useState([]);
 
   const [postTitle, setPostTitle] = useState('');
@@ -31,6 +35,27 @@ function App() {
     setSearchResults(filteredResults);
   }, [posts, search]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const id = posts.length + 1;
+
+    const newPost = {
+      id: id,
+      title: postTitle,
+      body: postBody,
+      datetime: datetime,
+    };
+
+    setPosts((prevPosts) => [...prevPosts, newPost]);
+    console.log(newPost);
+    setPostTitle('');
+    setPostBody('');
+    history.push('/');
+  };
+
   return (
     <div className='App'>
       <Header title='Insight into React JS' />
@@ -50,12 +75,18 @@ function App() {
           path='/post'
         >
           <NewPost
+            handleSubmit={handleSubmit}
             postTitle={postTitle}
             setPostTitle={setPostTitle}
             postBody={postBody}
             setPostBody={setPostBody}
           />
         </Route>
+        <Route
+          exact
+          path='/about'
+          component={About}
+        ></Route>
       </Switch>
       <Footer />
     </div>
