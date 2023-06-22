@@ -6,7 +6,6 @@ import Home from './components/Home';
 import Nav from './components/Nav';
 import About from './components/About';
 import NewPost from './components/NewPost';
-import EditPost from './components/EditPost';
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -52,12 +51,6 @@ function App() {
           path='/post'
         >
           <NewPost addNewPost={addNewPost} />
-        </Route>
-        <Route
-          exact
-          path='/edit'
-        >
-          <EditPost />
         </Route>
         <Route
           exact
