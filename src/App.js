@@ -6,7 +6,7 @@ import Home from './components/Home';
 import Nav from './components/Nav';
 import About from './components/About';
 import NewPost from './components/NewPost';
-import EditPost from './components/EditPost';
+import DeletePost from './components/DeletePost';
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -33,19 +33,8 @@ function App() {
     setPosts((prevPosts) => [...prevPosts, newPost]);
   };
 
-  const deletePost = async (id) => {
-    try {
-      const response = await fetch(`${API}/${id}`, {
-        method: 'DELETE',
-      });
-      if (!response.ok) {
-        throw new Error('Failed to delete post');
-      }
-      const updatedPosts = posts.filter((post) => post.id !== id);
-      setPosts(updatedPosts);
-    } catch (error) {
-      console.error(error);
-    }
+  const onDeletePost = (id) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
   };
 
   return (
@@ -72,7 +61,7 @@ function App() {
           exact
           path='/post/:id'
         >
-          <EditPost deletePost={deletePost} />
+          <DeletePost onDeletePost={onDeletePost} />
         </Route>
         <Route
           exact
