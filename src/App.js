@@ -61,7 +61,10 @@ function App() {
           exact
           path='/post/:id'
         >
-          <DeletePost onDeletePost={onDeletePost} />
+          <DeletePost
+            posts={posts}
+            onDeletePost={onDeletePost}
+          />
         </Route>
         <Route
           exact
