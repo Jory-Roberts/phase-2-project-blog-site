@@ -43,7 +43,7 @@ const EditPost = ({ posts, setPosts }) => {
       <article className='post'>
         {selectedPost && (
           <>
-            <h3>{selectedPost.title}</h3>
+            <h2>{selectedPost.title}</h2>
             <p>{selectedPost.datetime}</p>
             <p>{selectedPost.body}</p>
           </>
