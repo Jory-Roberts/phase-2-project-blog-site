@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const DeletePost = ({ posts, onDeletePost }) => {
   const history = useHistory();
@@ -7,12 +8,6 @@ const DeletePost = ({ posts, onDeletePost }) => {
 
   const [selectedPostId, setSelectedPostId] = useState('');
   const [selectedPost, setSelectedPost] = useState(null);
-
-  useEffect(() => {
-    if (selectedPostId) {
-      fetchPostById(selectedPostId);
-    }
-  }, [selectedPostId]);
 
   const fetchPostById = async (postId) => {
     try {
@@ -26,6 +21,12 @@ const DeletePost = ({ posts, onDeletePost }) => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (selectedPostId) {
+      fetchPostById(selectedPostId);
+    }
+  }, [selectedPostId]);
 
   const handleDeletePost = async () => {
     try {
@@ -59,7 +60,7 @@ const DeletePost = ({ posts, onDeletePost }) => {
           <option value=''>-- Select Post --</option>
           {posts.map((post) => (
             <option
-              key={post.id}
+              key={uuidv4()}
               value={post.id}
             >
               {post.title}
