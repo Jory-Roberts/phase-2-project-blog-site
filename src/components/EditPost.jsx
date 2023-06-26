@@ -1,27 +1,41 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
-const API = process.env.REACT_APP_API_URL;
+import { useEffect } from 'react';
 
 const EditPost = ({ posts }) => {
-  // const { id } = useParams();
+  const { id } = useParams();
+  const API = process.env.REACT_APP_API_URL;
 
-  // const fetchPostById = async () => {
-  //   const postData = await fetch(`${API}/${API.id}`).then((postData) => postData.json());
-  //   console.log(postData);
-  // };
+  const filteredPosts = posts.filter((post) => post.id === id);
 
-  // useEffect(() => {
-  //   fetchPostById();
-  // }, [id]);
+  const handleChange = () => {
+    filteredPosts.map((post) => (
+      <main className='EditPost'>
+        <article className='post'>
+          <select>
+            <option key={post.id}>{post.title}</option>
+          </select>
+          <h2>{post.title}</h2>
+          <p>{post.datetime}</p>
+          <p>{post.body}</p>
+        </article>
+      </main>
+    ));
+  };
 
-  const selectedPostToEdit = posts.map((post) => <option key={post.id}>{post.title}</option>);
+  const fetchPostById = async () => {
+    const postData = await fetch(`${API}${API.id}`).then((postData) => postData.json());
+    console.log(postData);
+  };
+
+  useEffect(() => {
+    fetchPostById();
+  }, [id]);
 
   return (
-    <article className='post'>
-      <h2>Edit Post</h2>
-      <select>{selectedPostToEdit}</select>
-    </article>
+    <>
+      {handleChange()}
+      <button onClick={(e) => console.log("I'm a button", e.target.value)}>Delete</button>
+    </>
   );
 };
 export default EditPost;
