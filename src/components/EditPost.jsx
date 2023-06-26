@@ -1,41 +1,57 @@
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const EditPost = ({ posts }) => {
+const EditPost = ({ posts, setPosts }) => {
   const { id } = useParams();
+  console.log(id);
   const API = process.env.REACT_APP_API_URL;
 
-  const filteredPosts = posts.filter((post) => post.id === id);
+  const [selectedPost, setSelectedPost] = useState(null);
 
-  const handleChange = () => {
-    filteredPosts.map((post) => (
-      <main className='EditPost'>
-        <article className='post'>
-          <select>
-            <option key={post.id}>{post.title}</option>
-          </select>
-          <h2>{post.title}</h2>
-          <p>{post.datetime}</p>
-          <p>{post.body}</p>
-        </article>
-      </main>
-    ));
-  };
-
-  const fetchPostById = async () => {
-    const postData = await fetch(`${API}${API.id}`).then((postData) => postData.json());
-    console.log(postData);
+  const fetchPostById = async (id) => {
+    try {
+      const response = await fetch(`${API}/${id}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch post');
+      }
+      const postData = await response.json();
+      console.log(postData);
+      setSelectedPost(postData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
-    fetchPostById();
+    fetchPostById(id);
   }, [id]);
 
+  // const handleUpdatePost = () => {
+  //   // Update the post using setPosts
+  //   const updatedPosts = posts.map((post) => {
+  //     if (post.id === id) {
+  //       return { ...post /* updated fields */ };
+  //     }
+  //     return post;
+  //   });
+
+  //   setPosts(updatedPosts);
+  // };
+
   return (
-    <>
-      {handleChange()}
-      <button onClick={(e) => console.log("I'm a button", e.target.value)}>Delete</button>
-    </>
+    <main className='EditPost'>
+      <article className='post'>
+        {selectedPost && (
+          <>
+            <h3>{selectedPost.title}</h3>
+            <p>{selectedPost.datetime}</p>
+            <p>{selectedPost.body}</p>
+          </>
+        )}
+        <button onClick={() => console.log('Button')}>Delete</button>
+      </article>
+    </main>
   );
 };
+
 export default EditPost;

@@ -57,7 +57,10 @@ function App() {
           exact
           path='/post/:id'
         >
-          <EditPost posts={posts} />
+          <EditPost
+            posts={posts}
+            setPosts={setPosts}
+          />
         </Route>
         <Route
           exact
