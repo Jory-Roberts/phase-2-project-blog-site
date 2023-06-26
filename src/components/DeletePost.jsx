@@ -2,7 +2,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 /*
-Need to address problem of state not updating without refresh. Need to correct issue of new blog post being added not displaying when clicking on it to redirect to Delete
 
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -90,6 +89,9 @@ const DeletePost = ({ onDeletePost }) => {
       history.push('/');
     } else {
       console.log('Failed to delete post');
+
+      /*     State updates when selected post is updated.
+      Created posts are returning undefined and not being fetched when clicked */
     }
   };
 
@@ -103,7 +105,7 @@ const DeletePost = ({ onDeletePost }) => {
             <p>{selectedPost.body}</p>
           </>
         )}
-        <button onClick={() => handleDeletePost(id)}>Delete</button>
+        <button onClick={() => handleDeletePost(selectedPost.id)}>Delete</button>
       </article>
     </main>
   );
