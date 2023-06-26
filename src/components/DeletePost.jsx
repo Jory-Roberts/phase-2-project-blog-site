@@ -1,55 +1,55 @@
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const DeletePost = ({ posts, onDeletePost }) => {
-  const history = useHistory();
-  const API = process.env.REACT_APP_API_URL;
-
-  const [selectedPostId, setSelectedPostId] = useState('');
   const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPostId, setSelectedPostId] = useState('');
 
-  const fetchPostById = async (postId) => {
-    try {
-      const response = await fetch(`${API}/${postId}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch post');
-      }
-      const postData = await response.json();
-      setSelectedPost(postData);
-    } catch (error) {
-      console.error(error);
-    }
+  const API = process.env.REACT_APP_API_URL;
+  const history = useHistory();
+
+  const fetchPostsById = async (id) => {
+    const response = await fetch(`${API}/${id}`);
+    const postData = await response.json();
+    setSelectedPost(postData);
+    console.log(postData);
   };
 
   useEffect(() => {
-    if (selectedPostId) {
-      fetchPostById(selectedPostId);
-    }
+    fetchPostsById(selectedPostId);
   }, [selectedPostId]);
 
   const handleDeletePost = async () => {
-    try {
-      const response = await fetch(`${API}/${selectedPostId}`, {
-        method: 'DELETE',
-      });
-      if (response.ok) {
-        onDeletePost(selectedPostId);
-        history.push('/');
-      } else {
-        console.log('Failed to delete post');
-      }
-    } catch (error) {
-      console.error(error);
+    const deleteResponse = await fetch(`${API}/${selectedPostId}`, {
+      method: 'DELETE',
+    });
+
+    if (deleteResponse.ok) {
+      onDeletePost(selectedPostId);
+      history.push('/');
+    } else {
+      console.error('Failed to delete post');
     }
   };
 
-  const handleSelectPost = (postId) => {
-    setSelectedPostId(postId);
+  const handleSelectPost = (id) => {
+    setSelectedPostId(id);
   };
 
+  const postsMap = posts.map((post) => {
+    return (
+      <option
+        key={uuidv4()}
+        value={post.id}
+      >
+        {post.title}
+      </option>
+    );
+  });
+
   return (
-    <main className='EditPost'>
+    <main className='DeletePost'>
       <div>
         <label htmlFor='post-select'>Select a Post:</label>
         <select
@@ -57,142 +57,19 @@ const DeletePost = ({ posts, onDeletePost }) => {
           value={selectedPostId}
           onChange={(e) => handleSelectPost(e.target.value)}
         >
-          <option value=''>-- Select Post --</option>
-          {posts.map((post) => (
-            <option
-              key={uuidv4()}
-              value={post.id}
-            >
-              {post.title}
-            </option>
-          ))}
+          <option>---Select Post---</option>
+          {postsMap}
         </select>
       </div>
       {selectedPost && (
         <article className='post'>
-          <h2>{selectedPost.title}</h2>
-          <p>{selectedPost.datetime}</p>
-          <p>{selectedPost.body}</p>
-          <button onClick={handleDeletePost}>Delete</button>
+          <h2>Title: {selectedPost.title}</h2>
+          <p className='postdate'>Date: {selectedPost.datetime}</p>
+          <p className='postbody'>Body: {selectedPost.body}</p>
+          <button onClick={() => handleDeletePost(selectedPost.id)}>Delete Post</button>
         </article>
       )}
     </main>
   );
 };
-
 export default DeletePost;
-
-// import { useParams, useHistory } from 'react-router-dom';
-// import { useEffect, useState } from 'react';
-
-// const DeletePost = ({ onDeletePost }) => {
-//   const { id } = useParams();
-//   const history = useHistory();
-//   const API = process.env.REACT_APP_API_URL;
-
-//   const [selectedPost, setSelectedPost] = useState(null);
-
-//   const fetchPostById = async (id) => {
-//     try {
-//       const response = await fetch(`${API}/${id}`);
-//       console.log(id);
-//       if (!response.ok) {
-//         throw new Error('Failed to fetch post');
-//       }
-//       const postData = await response.json();
-//       setSelectedPost(postData);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchPostById(id);
-//   }, [id]);
-
-//   const handleDeletePost = async () => {
-//     try {
-//       const response = await fetch(`${API}/${id}`, {
-//         method: 'DELETE',
-//       });
-//       if (response.ok) {
-//         onDeletePost(id);
-//         history.push('/');
-//       } else {
-//         console.log('Failed to delete post');
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   if (!selectedPost) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <main className='EditPost'>
-//       <article className='post'>
-//         <h2>{selectedPost.title}</h2>
-//         <p>{selectedPost.datetime}</p>
-//         <p>{selectedPost.body}</p>
-//         <button onClick={handleDeletePost}>Delete</button>
-//       </article>
-//     </main>
-//   );
-// };
-
-// export default DeletePost;
-
-/*
-
-import { useParams, useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-
-const EditPost = ({ deletePost }) => {
-  const { id } = useParams();
-  const history = useHistory();
-  console.log(id);
-  const API = process.env.REACT_APP_API_URL;
-
-  const [selectedPost, setSelectedPost] = useState([]);
-
-  const fetchPostById = async (id) => {
-    try {
-      const response = await fetch(`${API}/${id}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch post');
-      }
-      const postData = await response.json();
-      console.log(postData);
-      setSelectedPost(postData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPostById(id);
-  }, [id]);
-
-  const handleDelete = async () => {
-    await deletePost(id);
-    history.push('/');
-  };
-
-  return (
-    <main className='EditPost'>
-      <article className='post'>
-        {selectedPost && (
-          <>
-            <h2>{selectedPost.title}</h2>
-            <p>{selectedPost.datetime}</p>
-            <p>{selectedPost.body}</p>
-          </>
-        )}
-        <button onClick={handleDelete}>Delete</button>
-      </article>
-    </main>
-  );
-};
-*/
