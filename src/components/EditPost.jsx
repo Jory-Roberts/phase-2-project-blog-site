@@ -1,12 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const EditPost = ({ posts, setPosts }) => {
+const EditPost = ({ deletePost }) => {
   const { id } = useParams();
+  const history = useHistory();
   console.log(id);
   const API = process.env.REACT_APP_API_URL;
 
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState([]);
 
   const fetchPostById = async (id) => {
     try {
@@ -26,17 +27,10 @@ const EditPost = ({ posts, setPosts }) => {
     fetchPostById(id);
   }, [id]);
 
-  // const handleUpdatePost = () => {
-  //   // Update the post using setPosts
-  //   const updatedPosts = posts.map((post) => {
-  //     if (post.id === id) {
-  //       return { ...post /* updated fields */ };
-  //     }
-  //     return post;
-  //   });
-
-  //   setPosts(updatedPosts);
-  // };
+  const handleDelete = async () => {
+    await deletePost(id);
+    history.push('/');
+  };
 
   return (
     <main className='EditPost'>
@@ -48,7 +42,7 @@ const EditPost = ({ posts, setPosts }) => {
             <p>{selectedPost.body}</p>
           </>
         )}
-        <button onClick={() => console.log('Button')}>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
       </article>
     </main>
   );

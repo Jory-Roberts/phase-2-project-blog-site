@@ -33,6 +33,21 @@ function App() {
     setPosts((prevPosts) => [...prevPosts, newPost]);
   };
 
+  const deletePost = async (id) => {
+    try {
+      const response = await fetch(`${API}/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete post');
+      }
+      const updatedPosts = posts.filter((post) => post.id !== id);
+      setPosts(updatedPosts);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className='App'>
       <Header title='Insight into React JS' />
@@ -57,10 +72,7 @@ function App() {
           exact
           path='/post/:id'
         >
-          <EditPost
-            posts={posts}
-            setPosts={setPosts}
-          />
+          <EditPost deletePost={deletePost} />
         </Route>
         <Route
           exact
