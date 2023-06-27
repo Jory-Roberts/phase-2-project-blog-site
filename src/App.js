@@ -37,7 +37,7 @@ function App() {
 
   const onDeletePost = (id) => {
     const updatedPosts = posts.filter((post) => post.id !== id);
-    console.log(typeof id, JSON.stringify(updatedPosts));
+    console.log(typeof id, JSON.stringify(updatedPosts, null, 2));
     setPosts(updatedPosts);
   };
 
