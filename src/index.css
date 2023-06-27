@@ -29,6 +29,7 @@ body {
   max-width: 800px;
   min-height: 100vh;
   display: flex;
+  position: relative;
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
@@ -40,7 +41,30 @@ body {
 .Footer {
   width: 100%;
   background-color: aqua;
+  padding: 1rem;
+  border-top: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.Footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+}
+
+/* .Footer {
+  padding: 0.75rem;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #333;
+  max-width: 800px;
+  background-color: aqua;
+} */
 
 .Nav {
   width: 100%;
