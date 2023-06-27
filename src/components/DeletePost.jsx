@@ -34,9 +34,7 @@ const DeletePost = ({ posts, onDeletePost }) => {
     }
   };
 
-  const handleSelectPost = (id) => {
-    setSelectedPostId(id);
-  };
+  const handleSelectPost = (id) => setSelectedPostId(id);
 
   const postsMap = posts.map((post) => {
     return (
