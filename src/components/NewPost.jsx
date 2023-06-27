@@ -30,7 +30,7 @@ const NewPost = ({ addNewPost }) => {
 
     addNewPost(newPost);
 
-    console.log(newPost);
+    console.log('Post Success', newPost);
 
     setPostTitle('');
     setPostBody('');

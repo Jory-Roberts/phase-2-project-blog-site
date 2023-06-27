@@ -11,9 +11,9 @@ const DeletePost = ({ posts, onDeletePost }) => {
 
   const fetchPostsById = async (id) => {
     const response = await fetch(`${API}/${id}`);
-    const postData = await response.json();
-    setSelectedPost(postData);
-    console.log(postData);
+    const postIdData = await response.json();
+    setSelectedPost(postIdData);
+    console.log(postIdData);
   };
 
   useEffect(() => {

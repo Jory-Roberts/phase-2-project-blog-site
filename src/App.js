@@ -16,8 +16,9 @@ function App() {
   const [search, setSearch] = useState('');
 
   const fetchPosts = async () => {
-    const response = await fetch(API).then((response) => response.json());
-    setPosts(response);
+    const response = await fetch(API);
+    const postData = await response.json();
+    setPosts(postData);
   };
 
   useEffect(() => {
