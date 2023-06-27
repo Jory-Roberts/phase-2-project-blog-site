@@ -31,11 +31,13 @@ function App() {
   }, [posts, search]);
 
   const addNewPost = (newPost) => {
+    console.log(JSON.stringify(newPost, null, 2));
     setPosts((prevPosts) => [...prevPosts, newPost]);
   };
 
   const onDeletePost = (id) => {
     const updatedPosts = posts.filter((post) => post.id !== id);
+    console.log(typeof id, JSON.stringify(updatedPosts));
     setPosts(updatedPosts);
   };
 

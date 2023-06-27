@@ -13,7 +13,7 @@ const DeletePost = ({ posts, onDeletePost }) => {
     const response = await fetch(`${API}/${id}`);
     const postIdData = await response.json();
     setSelectedPost(postIdData);
-    console.log(postIdData);
+    console.log('This is fetchPostsById', postIdData);
   };
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const DeletePost = ({ posts, onDeletePost }) => {
     });
 
     if (deleteResponse.ok) {
-      onDeletePost(selectedPostId);
+      onDeletePost(Number(selectedPostId));
       console.log('Delete success', selectedPostId);
       history.push('/');
     } else {

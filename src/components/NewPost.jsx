@@ -20,7 +20,7 @@ const NewPost = ({ addNewPost }) => {
       body: postBody,
     };
 
-    await fetch(API, {
+    const response = await fetch(API, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +28,9 @@ const NewPost = ({ addNewPost }) => {
       body: JSON.stringify(newPost),
     });
 
-    addNewPost(newPost);
+    const newPostData = await response.json();
+
+    addNewPost(newPostData);
 
     console.log('Post Success', newPost);
 
