@@ -27,6 +27,7 @@ const DeletePost = ({ posts, onDeletePost }) => {
 
     if (deleteResponse.ok) {
       onDeletePost(selectedPostId);
+      console.log('Delete success');
       history.push('/');
     } else {
       console.error('Failed to delete post');

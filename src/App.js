@@ -34,7 +34,8 @@ function App() {
   };
 
   const onDeletePost = (id) => {
-    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
+    const updatedPosts = posts.filter((post) => post.id !== id);
+    setPosts(updatedPosts);
   };
 
   return (
