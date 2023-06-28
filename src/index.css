@@ -194,13 +194,13 @@ body {
 }
 
 .form textarea {
-  height: 150px;
-  width: 100%;
+  height: 100px;
   outline: #333;
 }
 
 .form button {
   margin-top: 1rem;
+  margin-bottom: 2rem;
   height: 48px;
   min-width: 48px;
   border-radius: 10px;
@@ -240,9 +240,11 @@ body {
 }
 
 .DeletePost button {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   height: 48px;
   min-width: 48px;
-  border-radius: 0.25rem;
+  border-radius: 10px;
   padding: 0.5rem;
   font-size: 1rem;
   background-color: red;

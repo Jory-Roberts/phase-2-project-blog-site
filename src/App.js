@@ -43,7 +43,7 @@ function App() {
 
   return (
     <div className='App'>
-      <Header title='Insight into React JS' />
+      <Header title='Insight into React' />
       <Nav
         search={search}
         setSearch={setSearch}
