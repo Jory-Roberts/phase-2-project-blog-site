@@ -142,7 +142,7 @@ body {
   margin-bottom: 2rem;
 }
 
-.DeletePost {
+/* .DeletePost {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -152,7 +152,7 @@ body {
 
 .DeletePost > div {
   margin-bottom: 2rem;
-}
+} */
 
 .post {
   display: flex;
@@ -160,9 +160,25 @@ body {
   align-items: center;
 }
 
+.NewPost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.NewPost label {
+  margin-top: 1rem;
+}
+
 .form {
   display: flex;
   flex-direction: column;
+}
+
+.form label {
+  margin-top: 1rem;
+  align-items: center;
 }
 
 .form input[type='text'],
@@ -174,10 +190,13 @@ body {
   padding: 0.25rem;
   border-radius: 0.25rem;
   margin-right: 0.25rem;
+  outline: none;
 }
 
 .form textarea {
-  height: 100px;
+  height: 150px;
+  width: 100%;
+  outline: #333;
 }
 
 .form button {
@@ -187,5 +206,46 @@ body {
   border-radius: 10px;
   padding: 0.5rem;
   font-size: 1rem;
+  background-color: red;
+  color: #fff;
+  cursor: pointer;
+}
+
+.DeletePost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+.DeletePost div {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.DeletePost label {
+  display: block;
+}
+
+.DeletePost select {
+  margin-top: 0.5rem;
+  width: 250px;
+  text-align: center;
+}
+
+.DeletePost article {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.DeletePost button {
+  height: 48px;
+  min-width: 48px;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: red;
+  color: #fff;
   cursor: pointer;
 }

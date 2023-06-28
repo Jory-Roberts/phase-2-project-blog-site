@@ -56,7 +56,7 @@ const DeletePost = ({ posts, onDeletePost }) => {
           value={selectedPostId}
           onChange={(e) => handleSelectPost(e.target.value)}
         >
-          <option>---Select Post---</option>
+          <option> ---Select Post--- </option>
           {postsMap}
         </select>
       </div>
