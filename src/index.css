@@ -176,6 +176,10 @@ body {
   margin-right: 0.25rem;
 }
 
+.form textarea {
+  height: 100px;
+}
+
 .form button {
   margin-top: 1rem;
   height: 48px;
