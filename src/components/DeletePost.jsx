@@ -62,9 +62,9 @@ const DeletePost = ({ posts, onDeletePost }) => {
       </div>
       {selectedPost && (
         <article className='post'>
-          <h2>Title: {selectedPost.title}</h2>
-          <p className='postdate'>Date: {selectedPost.datetime}</p>
-          <p className='postbody'>Body: {selectedPost.body}</p>
+          <h2>{selectedPost.title}</h2>
+          <p className='postdate'>{selectedPost.datetime}</p>
+          <p className='postbody'>{selectedPost.body}</p>
           <button onClick={() => handleDeletePost(selectedPost.id)}>Delete Post</button>
         </article>
       )}
