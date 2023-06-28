@@ -40,7 +40,7 @@ body {
 .Header,
 .Footer {
   width: 100%;
-  background-color: aqua;
+  background-color: lightseagreen;
   padding: 1rem;
   border-top: 1px solid black;
   display: flex;
@@ -53,6 +53,35 @@ body {
   bottom: 0;
   width: 100%;
   height: 2.5rem;
+}
+
+.Nav {
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.searchForm {
+  width: 60%;
+  padding: 1rem 0 0 0.75rem;
+}
+
+.searchForm input[type='text'] {
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  min-height: 40px;
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  outline: none;
+}
+
+.searchForm label {
+  position: absolute;
+  left: -99999px;
 }
 
 /* .Footer {
@@ -69,8 +98,9 @@ body {
 .Nav {
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
+  background-color: lightgrey;
 }
 
 .Nav ul {
@@ -78,9 +108,18 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-  align-items: center;
+  justify-content: space-between;
+  color: #fff;
 }
 
 .Nav li {
   margin: 0 10px;
+}
+
+.Nav a {
+  color: black;
+}
+
+.Nav a:hover {
+  color: red;
 }
