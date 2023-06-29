@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <main>
+    <main className='About'>
       <h2>A blog about React</h2>
     </main>
   );
