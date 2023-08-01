@@ -1,6 +1,6 @@
 # Blog Site
 
-Search for previous posts and add your own. Any post you don't want to see anymore, simply delete. Happy blogging!
+This is a technical blog utilizing React. You can search for previous posts and add your own. Any post you don't want to see anymore, simply delete. Happy blogging!
 
 ## Installation
 
